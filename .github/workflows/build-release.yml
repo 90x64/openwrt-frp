@@ -119,12 +119,14 @@ jobs:
       SDK_NAME: ${{ matrix.sdk_name }}
       ARCH: ${{ matrix.arch }}
       CACHE_DIR: ~/cache
+    permissions:
+      contents: write  # 需要此权限才能创建 release
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}:openwrt-frp:${{ env.ARCH }}:release:cache:${{ github.run_number }}
